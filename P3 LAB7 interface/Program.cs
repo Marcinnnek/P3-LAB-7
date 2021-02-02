@@ -14,23 +14,25 @@ namespace P3_LAB7_interface
             //test2();
         }
 
+        static string RandomString(int length, Random rnd) //########################## przenieść poza funkcje (funkacja w funkcji)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[rnd.Next(s.Length)]).ToArray());
+        }
         private static void interfejsy(int size)
         {
             int arraySize = size; //###############################################################
 
             Random rnd = new Random();
-            static string RandomString(int length, Random rnd)
-            {
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-                return new string(Enumerable.Repeat(chars, length)
-                  .Select(s => s[rnd.Next(s.Length)]).ToArray());
-            }
 
 
-            List<Vault> origin = new List<Vault>();
+
+            //List<Vault> origin = new List<Vault>();
+            Vault[] origin = new Vault[100];
             for (int i = 0; i < arraySize; i++)
             {
-                origin.Add(new Vault(RandomString(((int)rnd.Next() % 15) + 5, rnd))); //wypełnienie tablicy losowymi elementami
+                origin[i]=(new Vault(RandomString(((int)rnd.Next() % 15) + 5, rnd))); //wypełnienie tablicy losowymi elementami
             }
 
             for (int i = 0; i < arraySize; i++) // wypisanie oryginalnej tablicy
@@ -43,7 +45,11 @@ namespace P3_LAB7_interface
             for (int i = 0; i < arraySize; i++)
             {
                 copyOrigin.Add((Vault)origin[i].Clone()); // kopiowanie obiektu
-                origin[i] = null; // zerowanie oryginalnej tablicy
+                for (int j = 0; j < copyOrigin[i].Code.Length; j++)
+                {
+                    copyOrigin[i].Code[j] = 0; // zerowanie oryginalnej tablicy
+                }
+                //origin[i] = null; // zerowanie oryginalnej tablicy
             }
 
             /*for (int i = 0; i < arraySize; i++) // wypisanie wyzerowanej oryginalnej tablicy 
