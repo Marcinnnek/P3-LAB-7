@@ -26,37 +26,21 @@ namespace P3_LAB7_interface
 
             Random rnd = new Random();
 
-
-
-            //List<Vault> origin = new List<Vault>();
             Vault[] origin = new Vault[100];
             for (int i = 0; i < arraySize; i++)
             {
                 origin[i]=(new Vault(RandomString(((int)rnd.Next() % 15) + 5, rnd))); //wypełnienie tablicy losowymi elementami
             }
 
-            for (int i = 0; i < arraySize; i++) // wypisanie oryginalnej tablicy
-            {
-                origin[i].Print();
-            }
-
-
             List<Vault> copyOrigin = new List<Vault>();  // tablica dla kopii obiektów
             for (int i = 0; i < arraySize; i++)
             {
                 copyOrigin.Add((Vault)origin[i].Clone()); // kopiowanie obiektu
-                for (int j = 0; j < copyOrigin[i].Code.Length; j++)
+                for (int j = 0; j < origin[i].Code.Length; j++)
                 {
-                    copyOrigin[i].Code[j] = 0; // zerowanie oryginalnej tablicy
+                    origin[i].Code[j] = 0; // zerowanie oryginalnej tablicy
                 }
-                //origin[i] = null; // zerowanie oryginalnej tablicy
             }
-
-            /*for (int i = 0; i < arraySize; i++) // wypisanie wyzerowanej oryginalnej tablicy 
-            {
-                if(origin[i]==null)
-                    Console.WriteLine("Pustka");
-            }*/
 
             Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
@@ -64,7 +48,16 @@ namespace P3_LAB7_interface
 
             for (int i = 0; i < arraySize; i++)     //wypisanie posortowanej kopii tablicy
             {
+                Console.Write("Kopia: ");
                 copyOrigin[i].Print();
+            }
+
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+            for (int i = 0; i < arraySize; i++) // wypisanie oryginalnej tablicy
+            {
+                Console.Write("Oryginał: ");
+                origin[i].Print();
             }
         }
         #region

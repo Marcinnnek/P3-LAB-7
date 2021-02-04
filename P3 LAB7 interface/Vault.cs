@@ -32,8 +32,13 @@ namespace P3_LAB7_interface
         }
         public object Clone()
         {
-            var newVault = (Vault)this.MemberwiseClone();
-            return newVault;
+            var data = new Vault()
+            {
+                _ownId = this._ownId,
+                _vaultName = this._vaultName,
+                _code = (int[])this._code.Clone()
+            };
+            return data;
         }
 
         private static int _staticId;
